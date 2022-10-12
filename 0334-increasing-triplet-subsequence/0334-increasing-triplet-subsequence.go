@@ -6,7 +6,7 @@ func increasingTriplet(nums []int) bool {
     f, s := math.MaxInt, math.MaxInt
     
     // 2 1 5 0 4 6
-    // f f s f s *
+    // f f s f s t
     for _, n := range nums {
         if f >= n {
             f = n
