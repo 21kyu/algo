@@ -71,7 +71,7 @@ func (ds *DisjointSet) union(x, y int) bool {
     } else {
         ds.parent[xRoot] = yRoot
         // path compression
-        ds.rank[xRoot]++
+        ds.rank[yRoot]++
     }
     
     return true
