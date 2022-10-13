@@ -13,7 +13,7 @@ func employeeFreeTime(schedule [][]*Interval) []*Interval {
         return ans
     }
     
-    // sort
+    // sort!
     // e1 [1,2],[5,6]
     // e2 [1,3]
     // e3 [4,10]
