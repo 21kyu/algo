@@ -1,6 +1,6 @@
 // 1. set + memoization
 // 2. trie + dfs
-// 3. rabin-karp
+// 3. rabin-karp <
 
 func differByOne(dict []string) bool {
     return withRabinKarp(dict)
