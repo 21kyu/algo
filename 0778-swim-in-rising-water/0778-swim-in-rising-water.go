@@ -1,5 +1,57 @@
 func swimInWater(grid [][]int) int {
-    return dijkstraWithMinHeap(grid)
+    return binarySearchAndDfs(grid)
+    // return dijkstraWithMinHeap(grid)
+}
+
+func binarySearchAndDfs(grid [][]int) int {
+    n := len(grid)
+    l, h := grid[0][0], n*n
+    
+    // t보다 작거나 같은 시간에 n-1, n-1까지 도달할 수 있는지를 확인
+    possible := func(t int) bool {
+        seen := make(map[int]bool)
+        seen[0] = true
+        dir := [][]int{{1,0},{-1,0},{0,1},{0,-1}}
+        
+        // 빠르게 끝점까지 도달해보기 위해서 dfs 형태로 탐색
+        stk := []int{0}
+        
+        for len(stk) > 0 {
+            k := stk[len(stk)-1]
+            stk = stk[:len(stk)-1]
+            r, c := k/n, k%n
+            
+            if r == n-1 && c == n-1 {
+                return true
+            }
+            
+            for _, d := range dir {
+                rr, cc := r+d[0], c+d[1]
+                kk := rr * n + cc
+                
+                if rr >= 0 && rr < n && cc >= 0 && cc < n && !seen[kk] && grid[rr][cc] <= t {
+                    stk = append(stk, kk)
+                    seen[kk] = true
+                }
+            }
+        }
+        return false
+    }
+    
+    // logn 이진탐색
+    for l < h {
+        m := int(uint(l+h) >> 1)
+        // n^2
+        if possible(m) {
+            // 현재 높이(m)으로 맵의 끝까지 도달 가능하면 h를 m으로 설정
+            h = m
+        } else {
+            // 도달 불가능하면 l를 m+1로 설정
+            l = m + 1
+        }
+    }
+    
+    return l
 }
 
 func dijkstraWithMinHeap(grid [][]int) int {
