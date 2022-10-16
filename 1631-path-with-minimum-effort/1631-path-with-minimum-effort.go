@@ -16,7 +16,6 @@ func binarySearchAndDfs(heights [][]int) int {
             high = max(high, heights[i][j])
         }
     }
-    ans := high
     
     possible := func(mid int) bool {
         // i, j -> i*m + j
@@ -53,14 +52,13 @@ func binarySearchAndDfs(heights [][]int) int {
         mid := int(uint(low+high) >> 1)
         // n^2
         if possible(mid) {
-            ans = min(ans, mid)
             high = mid - 1
         } else {
             low = mid + 1
         }
     }
     
-    return ans
+    return low
 }
 
 func min(a, b int) int {
