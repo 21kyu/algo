@@ -18,38 +18,41 @@ func binarySearchAndDfs(heights [][]int) int {
     }
     ans := high
     
-    reachable := func(mid int) bool {
+    possible := func(mid int) bool {
         // i, j -> i*m + j
         seen := make(map[int]bool)
-        stk := []int{0}
         dir := [][]int{{1,0},{-1,0},{0,1},{0,-1}}
         seen[0] = true
         
-        for len(stk) > 0 {
-            x := stk[len(stk)-1]
-            stk = stk[:len(stk)-1]
-            r, c := x/m, x%m
-            
+        var dfs func(int, int) bool
+        dfs = func(r, c int) bool {
             if r == n-1 && c == m-1 {
                 return true
             }
+            
+            seen[r*m + c] = true
             
             for _, d := range dir {
                 rr, cc := r + d[0], c + d[1]
                 xx := rr * m + cc
                 if rr>=0 && cc>=0 && rr<n && cc<m && !seen[xx] && abs(heights[rr][cc] - heights[r][c]) <= mid {
-                    stk = append(stk, xx)
-                    seen[xx] = true
+                    if dfs(rr, cc) {
+                        return true
+                    }
                 }
             }
+            
+            return false
         }
         
-        return false
+        return dfs(0, 0)
     }
     
+    // logn
     for low <= high {
         mid := int(uint(low+high) >> 1)
-        if reachable(mid) {
+        // n^2
+        if possible(mid) {
             ans = min(ans, mid)
             high = mid - 1
         } else {
