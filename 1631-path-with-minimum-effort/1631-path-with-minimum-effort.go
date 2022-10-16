@@ -10,7 +10,12 @@ func minimumEffortPath(heights [][]int) int {
 
 func binarySearchAndDfs(heights [][]int) int {
     n, m := len(heights), len(heights[0])
-    low, high := 0, 1_000_000
+    low, high := 0, 0
+    for i:=0; i<n; i++ {
+        for j:=0; j<m; j++ {
+            high = max(high, heights[i][j])
+        }
+    }
     ans := high
     
     reachable := func(mid int) bool {
