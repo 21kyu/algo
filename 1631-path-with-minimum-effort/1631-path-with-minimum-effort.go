@@ -4,8 +4,8 @@
 
 func minimumEffortPath(heights [][]int) int {
     // return minimalSpanningTree(heights)
-    // return dijkstraWithMinHeap(heights)
-    return binarySearchAndDfs(heights)
+    return dijkstraWithMinHeap(heights)
+    // return binarySearchAndDfs(heights)
 }
 
 func binarySearchAndDfs(heights [][]int) int {
