@@ -4,9 +4,65 @@
 
 func minimumEffortPath(heights [][]int) int {
     // return minimalSpanningTree(heights)
-    return dijkstraWithMinHeap(heights)
+    // return dijkstraWithMinHeap(heights)
+    return binarySearchAndDfs(heights)
 }
 
+func binarySearchAndDfs(heights [][]int) int {
+    n, m := len(heights), len(heights[0])
+    low, high := 0, 1_000_000
+    ans := high
+    
+    reachable := func(mid int) bool {
+        // i, j -> i*m + j
+        seen := make(map[int]bool)
+        stk := []int{0}
+        dir := [][]int{{1,0},{-1,0},{0,1},{0,-1}}
+        seen[0] = true
+        
+        for len(stk) > 0 {
+            x := stk[len(stk)-1]
+            stk = stk[:len(stk)-1]
+            r, c := x/m, x%m
+            
+            if r == n-1 && c == m-1 {
+                return true
+            }
+            
+            for _, d := range dir {
+                rr, cc := r + d[0], c + d[1]
+                xx := rr * m + cc
+                if rr>=0 && cc>=0 && rr<n && cc<m && !seen[xx] && abs(heights[rr][cc] - heights[r][c]) <= mid {
+                    stk = append(stk, xx)
+                    seen[xx] = true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    for low <= high {
+        mid := int(uint(low+high) >> 1)
+        if reachable(mid) {
+            ans = min(ans, mid)
+            high = mid - 1
+        } else {
+            low = mid + 1
+        }
+    }
+    
+    return ans
+}
+
+func min(a, b int) int {
+    if a > b {
+        return b
+    }
+    return a
+}
+
+// vlogv (v = n*m)
 func dijkstraWithMinHeap(heights [][]int) int {
     // min heap을 만든다
     n, m := len(heights), len(heights[0])
