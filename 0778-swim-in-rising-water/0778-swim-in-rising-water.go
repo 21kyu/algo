@@ -1,6 +1,93 @@
 func swimInWater(grid [][]int) int {
-    return binarySearchAndDfs(grid)
+    return byDisjointSetUnion(grid)
+    // return binarySearchAndDfs(grid)
     // return dijkstraWithMinHeap(grid)
+}
+
+// Minimal Spanning Tree / Kruskal
+func byDisjointSetUnion(grid [][]int) int {
+    n := len(grid)
+    
+    if n == 1 {
+        return 0
+    }
+    
+    ds := NewDisjointSet(n*n)
+    pos := make([]int, n*n)
+    dir := [][]int{{1,0},{-1,0},{0,1},{0,-1}}
+    
+    for i := range pos {
+        pos[i] = i
+    }
+    
+    // n^2*logn^2
+    sort.Slice(pos, func(a, b int) bool {
+        return grid[pos[a]/n][pos[a]%n] < grid[pos[b]/n][pos[b]%n]
+    })
+    
+    // n^2
+    for _, p := range pos {
+        r, c := p/n, p%n
+        
+        for _, d := range dir {
+            rr, cc := r + d[0], c + d[1]
+            
+            if rr >= 0 && cc >= 0 && rr < n && cc < n && grid[rr][cc] < grid[r][c] {
+                // a(n^2)
+                ds.union(p, rr*n+cc)
+            }
+        }
+        
+        if ds.find(0) == ds.find(n*n-1) {
+            return grid[r][c]
+        }
+    }
+    
+    return -1
+    
+}
+
+type DisjointSet struct {
+    rank, parent []int
+    size int
+}
+
+func NewDisjointSet(n int) *DisjointSet {
+    ds := &DisjointSet{
+        make([]int, n),
+        make([]int, n),
+        n,
+    }
+    for i:=0; i<n; i++ {
+        ds.parent[i] = i
+    }
+    return ds
+}
+
+func (ds *DisjointSet) find(x int) int {
+    if x != ds.parent[x] {
+        ds.parent[x] = ds.find(ds.parent[x])
+    }
+    return ds.parent[x]
+}
+
+func (ds *DisjointSet) union(x, y int) bool {
+    px, py := ds.find(x), ds.find(y)
+    
+    if px == py {
+        return false
+    }
+    
+    if ds.rank[px] > ds.rank[py] {
+        ds.parent[py] = px
+    } else {
+        ds.parent[px] = py
+        if ds.rank[px] == ds.rank[py] {
+            ds.rank[py]++
+        }
+    }
+    
+    return true
 }
 
 func binarySearchAndDfs(grid [][]int) int {
