@@ -1,12 +1,15 @@
 func checkIfPangram(sentence string) bool {
-    set := make(map[byte]bool)
+    alpha := [26]byte{}
     
     for i := range sentence {
-        set[sentence[i]] = true
-        if len(set) == 26 {
-            return true
+        alpha[sentence[i] - 'a']++
+    }
+    
+    for _, v := range alpha {
+        if v == 0 {
+            return false
         }
     }
     
-    return len(set) == 26
+    return true
 }
