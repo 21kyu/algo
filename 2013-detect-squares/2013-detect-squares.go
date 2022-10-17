@@ -23,16 +23,22 @@ func (d *DetectSquares) Count(point []int) int {
     ans := 0
     
     for _, p := range d.points {
-        if math.Abs(float64(x - p[0])) != math.Abs(float64(y - p[1])) || x == p[0] || y == p[1] {
+        if abs(x - p[0]) != abs(y - p[1]) || x == p[0] || y == p[1] {
             continue
         }
         
-        if d.counts[[2]int{x, p[1]}] > 0 && d.counts[[2]int{p[0], y}] > 0 {
-            ans += d.counts[[2]int{x, p[1]}] * d.counts[[2]int{p[0], y}]
-        }
+        ans += d.counts[[2]int{x, p[1]}] * d.counts[[2]int{p[0], y}]
     }
     return ans
 }
+
+func abs(x int) int {
+    if x < 0 {
+        return x * -1
+    }
+    return x
+}
+
 
 /**
  * Your DetectSquares object will be instantiated and called as such:
