@@ -3,12 +3,12 @@ func maxLength(arr []string) int {
     
     var backTrack func(int, string) int
     backTrack = func(index int, form string) int {
-        m := make(map[rune]bool, len(form))
-        for _, ch := range form {
-            if _, ok := m[ch]; ok {
+        var m [26]bool
+        for i := range form {
+            if m[form[i]-'a'] {
                 return 0
             }
-            m[ch] = true
+            m[form[i]-'a'] = true
         }
         
         if index >= n {
