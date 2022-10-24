@@ -5,10 +5,11 @@ func maxLength(arr []string) int {
     backTrack = func(index int, form string) int {
         var m [26]bool
         for i := range form {
-            if m[form[i]-'a'] {
+            pos := form[i] - 'a'
+            if m[pos] {
                 return 0
             }
-            m[form[i]-'a'] = true
+            m[pos] = true
         }
         
         if index >= n {
