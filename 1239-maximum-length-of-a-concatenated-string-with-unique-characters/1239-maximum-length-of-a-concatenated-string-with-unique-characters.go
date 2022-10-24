@@ -1,7 +1,3 @@
-import (
-	"fmt"
-)
-
 func maxLength(arr []string) int {
     n := len(arr)
     
@@ -20,7 +16,6 @@ func maxLength(arr []string) int {
         }
         
         return max(backTrack(index+1, form), backTrack(index+1, form+arr[index]))
-        
     }
     
     return backTrack(0, "")
