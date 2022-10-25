@@ -2,7 +2,7 @@ func arrayStringsAreEqual(word1 []string, word2 []string) bool {
     return hash(word1) == hash(word2)
 }
 
-// djb2: http://www.cse.yorku.ca/~oz/hash.html
+// http://www.cse.yorku.ca/~oz/hash.html - djb2
 func hash(word []string) int {
     hash := 5381
     for _, str := range word {
