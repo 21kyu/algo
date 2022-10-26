@@ -13,6 +13,5 @@ func checkSubarraySum(nums []int, k int) bool {
             m[rem] = i    
         }    
     }
-    
     return false
 }
