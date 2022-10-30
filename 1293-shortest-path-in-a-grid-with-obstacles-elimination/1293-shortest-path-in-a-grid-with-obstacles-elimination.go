@@ -12,27 +12,27 @@ func shortestPath(grid [][]int, k int) int {
     
     for h.Len() > 0 {
         item := heap.Pop(h).(Item)
-        r, c, s, e := item.row, item.col, item.step, item.eliminateCount
+        r, c, s := item.row, item.col, item.step
         
         if r == m-1 && c == n-1 {
             return s
         }
         
         for _, d := range dir {
-            rr, cc, ee := r + d[0], c + d[1], e
+            rr, cc, e := r + d[0], c + d[1], item.eliminateCount
             
             if rr >= 0 && cc >= 0 && rr < m && cc < n {
                 
                 if grid[rr][cc] == 1 {
-                    ee--
-                    if ee == 0 {
+                    e--
+                    if e == 0 {
                         continue
                     }
                 }
                 
-                if visited[rr][cc] < ee {
-                    visited[rr][cc] = ee
-                    heap.Push(h, Item{rr, cc, s+1, ee})
+                if visited[rr][cc] < e {
+                    visited[rr][cc] = e
+                    heap.Push(h, Item{rr, cc, s+1, e})
                 }
             }
         }
