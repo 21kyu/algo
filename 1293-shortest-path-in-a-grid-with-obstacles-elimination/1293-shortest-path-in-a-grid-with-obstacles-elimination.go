@@ -1,7 +1,3 @@
-import (
-    "container/heap"
-)
-
 func shortestPath(grid [][]int, k int) int {
     m, n := len(grid), len(grid[0])
     h := &MinHeap{}
