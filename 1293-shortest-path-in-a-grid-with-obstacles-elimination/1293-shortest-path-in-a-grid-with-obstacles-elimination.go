@@ -22,7 +22,6 @@ func shortestPath(grid [][]int, k int) int {
             rr, cc, e := r + d[0], c + d[1], item.eliminateCount
             
             if rr >= 0 && cc >= 0 && rr < m && cc < n {
-                
                 if grid[rr][cc] == 1 {
                     e--
                     if e == 0 {
