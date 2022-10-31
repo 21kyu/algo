@@ -1,7 +1,7 @@
 func swimInWater(grid [][]int) int {
     //return byDisjointSetUnion(grid)
-    //return binarySearchAndDfs(grid)
-    return dijkstraWithMinHeap(grid)
+    return binarySearchAndDfs(grid)
+    //return dijkstraWithMinHeap(grid)
 }
 
 // Minimal Spanning Tree / Kruskal
