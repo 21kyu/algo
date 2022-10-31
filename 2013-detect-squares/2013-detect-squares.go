@@ -38,3 +38,11 @@ func abs(x int) int {
     }
     return x
 }
+
+
+/**
+ * Your DetectSquares object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Add(point);
+ * param_2 := obj.Count(point);
+ */
