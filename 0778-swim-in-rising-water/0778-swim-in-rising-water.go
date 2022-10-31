@@ -1,6 +1,6 @@
 func swimInWater(grid [][]int) int {
-    // return byDisjointSetUnion(grid)
-    return binarySearchAndDfs(grid)
+    return byDisjointSetUnion(grid)
+    //return binarySearchAndDfs(grid)
     // return dijkstraWithMinHeap(grid)
 }
 
