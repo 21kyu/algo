@@ -1,7 +1,6 @@
 func findBall(grid [][]int) []int {
     m, n := len(grid), len(grid[0])
     var q []Ball
-    
     ans := make([]int, n)
     for i:=0; i<n; i++ {
         ans[i] = -1
