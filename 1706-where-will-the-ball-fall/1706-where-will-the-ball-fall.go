@@ -21,11 +21,6 @@ func findBall(grid [][]int) []int {
         b := q[0]
         q = q[1:]
         
-        if b.r == m {
-            ans[b.s] = b.c
-            continue
-        }
-        
         if visited[b.r][b.c] == 0 {
             visited[b.r][b.c] = b.s + 1
         } else {
@@ -47,6 +42,11 @@ func findBall(grid [][]int) []int {
             }
             
             cc = b.c - 1
+        }
+        
+        if rr == m {
+            ans[b.s] = cc
+            continue
         }
         
         q = append(q, Ball{b.s, rr, cc})
