@@ -7,13 +7,10 @@ func findBall(grid [][]int) []int {
         visited[i] = make([]int, n)
     }
     
-    for i:=0; i<n; i++ {
-        q = append(q, Ball{i, 0, i})
-    }
-    
     ans := make([]int, n)
-    for i := range ans {
+    for i:=0; i<n; i++ {
         ans[i] = -1
+        q = append(q, Ball{i, 0, i})
     }
     
     for len(q) > 0 {
