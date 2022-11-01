@@ -8,6 +8,7 @@ func getRow(rowIndex int) []int {
         }
         
         p = append(p, 1)
+        
         for i:=len(p)-2; i>0; i-- {
             p[i] += p[i-1]
         }
