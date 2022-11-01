@@ -4,6 +4,7 @@ func findBall(grid [][]int) []int {
     var q []Ball
     
     visited := make([][]int, m)
+    
     for i := range visited {
         visited[i] = make([]int, n)
     }
