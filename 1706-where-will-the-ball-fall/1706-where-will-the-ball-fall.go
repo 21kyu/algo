@@ -34,13 +34,11 @@ func findBall(grid [][]int) []int {
             if b.c+1 >= n || grid[b.r][b.c+1] != 1 {
                 continue
             }
-            
             cc = b.c + 1
         } else {
             if b.c-1 < 0 || grid[b.r][b.c-1] != -1 {
                 continue
             }
-            
             cc = b.c - 1
         }
         
