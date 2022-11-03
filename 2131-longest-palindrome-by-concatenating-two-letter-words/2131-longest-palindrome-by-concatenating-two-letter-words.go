@@ -1,5 +1,5 @@
 func longestPalindrome(words []string) int {
-    seen := make(map[string]int)
+    seen := make(map[string]int, len(words))
     length := 0
     
     for _, w := range words {
